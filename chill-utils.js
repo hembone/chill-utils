@@ -1,10 +1,10 @@
-var CHILL = {
+const CHILL = {
 
 	cookie : {
 		set : function(name, value, days) {
-			var expires = '';
+			let expires = '';
 			if(days) {
-				var date = new Date();
+				let date = new Date();
 				date.setTime(date.getTime()+(days*24*60*60*1000));
 				expires = "; expires="+date.toGMTString();
 			} else {
@@ -13,10 +13,10 @@ var CHILL = {
 			document.cookie = name+"="+value+expires+"; path=/";
 		},
 		get : function(name) {
-			var nameEQ = name + "=";
-			var ca = document.cookie.split(';');
-			for(var i=0;i < ca.length;i++) {
-				var c = ca[i];
+			let nameEQ = name + "=";
+			let ca = document.cookie.split(';');
+			for(let i=0;i < ca.length;i++) {
+				let c = ca[i];
 				while(c.charAt(0)===' ') {
 					c = c.substring(1,c.length);
 				}
@@ -32,9 +32,20 @@ var CHILL = {
 	},
 
 	popupWindow : function(url, title, w, h) {
-		var left = (screen.width/2)-(w/2);
-		var top = (screen.height/2)-(h/2);
+		let left = (screen.width/2)-(w/2);
+		let top = (screen.height/2)-(h/2);
 		return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+	},
+
+	getPosition : function(element) {
+		let xPosition = 0;
+		let yPosition = 0;
+		while(element) {
+			xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+			yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+			element = element.offsetParent;
+		}
+		return { x: xPosition, y: yPosition };
 	},
 
 	windowWidth : function() {
@@ -57,8 +68,8 @@ var CHILL = {
 		return res;
 	},
 
-	// var requestedParam = CHILL.urlParam('name');
-	// var allParams = CHILL.urlParam();
+	// let requestedParam = CHILL.urlParam('name');
+	// let allParams = CHILL.urlParam();
 	urlParam : function(param) {
 		let vars = {};
 		let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
@@ -77,7 +88,7 @@ var CHILL = {
 	},
 
 	// CHILL.isScrolled.init();
-	// When scrolled, ".scroll-active" will be added to all elements with the the ".is-scrolled" class.
+	// When scrolled, ".scroll-active" will be added to all elements with the ".is-scrolled" class.
 	// The offset defaults to 10px. You can change it by adding a parameter: CHILL.isScrolled.init(20);
 	isScrolled : {
 		init : function(offset) {
@@ -99,18 +110,14 @@ var CHILL = {
 		}
 	},
 
-	// Is the element visible in the viewport
+	// Is the element visible in the viewport.
 	isVisible : function(selector) {
 		jQuery(window).scroll(function() {
-			var top_of_element    = jQuery(selector).offset().top;
-			var bottom_of_element = jQuery(selector).offset().top + jQuery(selector).outerHeight();
-			var bottom_of_screen  = jQuery(window).scrollTop() + jQuery(window).innerHeight();
-			var top_of_screen     = jQuery(window).scrollTop();
-			if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
-				return true;
-			} else {
-				return false;
-			}
+			let top_of_element    = jQuery(selector).offset().top;
+			let bottom_of_element = jQuery(selector).offset().top + jQuery(selector).outerHeight();
+			let bottom_of_screen  = jQuery(window).scrollTop() + jQuery(window).innerHeight();
+			let top_of_screen     = jQuery(window).scrollTop();
+			return (bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element);
 		});
 	},
 
@@ -130,16 +137,17 @@ var CHILL = {
 		}
 	},
 
+	// Match the height of the fromSelector to the toSelector.
 	matchHeight : function(fromSelector, toSelector) {
 		let fromHeight = jQuery(fromSelector).height();
 		jQuery(toSelector).height(fromHeight);
 	},
 
-	// Find all selected and match heights with the tallest one.
+	// Find all selected elements and match heights with the tallest one.
 	evenHeight : function(selector) {
 		let maxH = 0;
 		let test = 0;
-		jQuery(selector).each(function(idx) {
+		jQuery(selector).each(function() {
 			test = jQuery(this).innerHeight();
 			if (maxH < test) {
 				maxH = test;
