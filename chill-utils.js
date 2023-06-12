@@ -57,6 +57,7 @@ const CHILL = {
 	},
 
 	// CHILL.hasUrlSegment('segment-name');
+	// * requires jQuery
 	hasUrlSegment : function(segment) {
 		let res = false;
 		let segments = window.location.pathname.split('/');
