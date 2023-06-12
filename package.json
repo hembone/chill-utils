@@ -1,0 +1,22 @@
+{
+  "name": "chill-utils",
+  "version": "1.0.0",
+  "description": "Chill js and css utils",
+  "main": "chill-utils.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hembone/chill-utils.git"
+  },
+  "author": "hembone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hembone/chill-utils/issues"
+  },
+  "homepage": "https://github.com/hembone/chill-utils#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}

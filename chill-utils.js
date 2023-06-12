@@ -57,7 +57,7 @@ const CHILL = {
 	},
 
 	// CHILL.hasUrlSegment('segment-name');
-	// * requires jQuery
+	// Requires jQuery
 	hasUrlSegment : function(segment) {
 		let res = false;
 		let segments = window.location.pathname.split('/');
@@ -81,6 +81,7 @@ const CHILL = {
 	},
 
 	// CHILL.scrollTo('.contact-form', 200);
+	// Requires jQuery
 	scrollTo : function(selector, speed) {
 		let offset = jQuery(selector).offset();
 		jQuery('html, body').animate({
@@ -91,6 +92,7 @@ const CHILL = {
 	// CHILL.isScrolled.init();
 	// When scrolled, ".scroll-active" will be added to all elements with the ".is-scrolled" class.
 	// The offset defaults to 10px. You can change it by adding a parameter: CHILL.isScrolled.init(20);
+	// Requires jQuery
 	isScrolled : {
 		init : function(offset) {
 			CHILL.isScrolled.check(offset);
@@ -112,6 +114,7 @@ const CHILL = {
 	},
 
 	// Is the element visible in the viewport.
+	// Requires jQuery
 	isVisible : function(selector) {
 		jQuery(window).scroll(function() {
 			let top_of_element    = jQuery(selector).offset().top;
@@ -122,6 +125,7 @@ const CHILL = {
 		});
 	},
 
+	// Requires jQuery
 	resize : {
 		init : function(callback) {
 			if(typeof callback === 'function') {
@@ -139,12 +143,14 @@ const CHILL = {
 	},
 
 	// Match the height of the fromSelector to the toSelector.
+	// Requires jQuery
 	matchHeight : function(fromSelector, toSelector) {
 		let fromHeight = jQuery(fromSelector).height();
 		jQuery(toSelector).height(fromHeight);
 	},
 
 	// Find all selected elements and match heights with the tallest one.
+	// Requires jQuery
 	evenHeight : function(selector) {
 		let maxH = 0;
 		let test = 0;
@@ -157,6 +163,7 @@ const CHILL = {
 		jQuery(selector).css('min-height', maxH);
 	},
 
+	// Requires jQuery
 	copyToClipboard : function(selector) {
 		jQuery(selector).select();
 		document.execCommand("copy");
