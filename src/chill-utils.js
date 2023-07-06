@@ -125,7 +125,6 @@ const CHILL = {
 		});
 	},
 
-	// Requires jQuery
 	resize : {
 		init : function(callback) {
 			if(typeof callback === 'function') {
@@ -135,7 +134,7 @@ const CHILL = {
 			}
 		},
 		set : function(callback) {
-			jQuery(window).on('resize', function() {
+			window.addEventListener('resize', function() {
 				clearTimeout(CHILL.resize.resizeTimeout);
 				CHILL.resize.resizeTimeout = setTimeout(callback, 100);
 			});
