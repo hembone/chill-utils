@@ -125,6 +125,7 @@ const CHILL = {
 		});
 	},
 
+	// CHILL.resize.init(myOnResizeFunction);
 	resize : {
 		init : function(callback) {
 			if(typeof callback === 'function') {
@@ -141,8 +142,7 @@ const CHILL = {
 		}
 	},
 
-	// CHILL.matchHeight('.fromClass', '.toClass');
-	// CHILL.matchHeight('#fromId', '#toId');
+	// CHILL.matchHeight('.fromSelector', '#toSelector');
 	// Match the height of the fromSelector to the toSelector.
 	matchHeight : function(fromSelector, toSelector) {
 		if (fromSelector && toSelector) {
