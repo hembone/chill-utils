@@ -141,25 +141,37 @@ const CHILL = {
 		}
 	},
 
+	// CHILL.matchHeight('.fromClass', '.toClass');
+	// CHILL.matchHeight('#fromId', '#toId');
 	// Match the height of the fromSelector to the toSelector.
-	// Requires jQuery
 	matchHeight : function(fromSelector, toSelector) {
-		let fromHeight = jQuery(fromSelector).height();
-		jQuery(toSelector).height(fromHeight);
+		if (fromSelector && toSelector) {
+			let fromEl = document.querySelector(fromSelector);
+			let toEl = document.querySelector(toSelector);
+			if (fromEl && toEl) {
+				let fromHeight = fromEl.offsetHeight;
+				document.querySelector(toSelector).setAttribute("style", "height:"+fromHeight+"px;");
+			}
+		}
 	},
 
+	// CHILL.evenHeight('.elementClass');
 	// Find all selected elements and match heights with the tallest one.
-	// Requires jQuery
 	evenHeight : function(selector) {
 		let maxH = 0;
 		let test = 0;
-		jQuery(selector).each(function() {
-			test = jQuery(this).innerHeight();
-			if (maxH < test) {
-				maxH = test;
-			}
-		});
-		jQuery(selector).css('min-height', maxH);
+		let els = document.querySelectorAll(selector);
+		if (els) {
+			els.forEach((el) => {
+				test = el.offsetHeight;
+				if (maxH < test) {
+					maxH = test;
+				}
+			});
+			els.forEach((el) => {
+				el.setAttribute("style", "min-height:"+maxH+"px;");
+			});
+		}
 	},
 
 	// Requires jQuery
