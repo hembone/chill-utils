@@ -1,5 +1,6 @@
 const CHILL = {
 
+	// Set, get and remove browser cookies.
 	cookie : {
 		set : function(name, value, days) {
 			let expires = '';
@@ -57,72 +58,27 @@ const CHILL = {
 	},
 
 	// CHILL.hasUrlSegment('segment-name');
-	// Requires jQuery
 	hasUrlSegment : function(segment) {
 		let res = false;
 		let segments = window.location.pathname.split('/');
-		jQuery.each(segments, function(idx, val) {
-			if (val === segment) {
+		segments.forEach((seg) => {
+			if (seg === segment) {
 				res = true;
 			}
 		});
 		return res;
 	},
 
-	// let requestedParam = CHILL.urlParam('name');
-	// let allParams = CHILL.urlParam();
-	urlParam : function(param) {
-		let vars = {};
-		let parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
-			function(m,key,value) {
-				vars[key] = value;
-			});
-		return (typeof vars[param] !== 'undefined') ? vars[param] : vars;
-	},
-
-	// CHILL.scrollTo('.contact-form', 200);
-	// Requires jQuery
-	scrollTo : function(selector, speed) {
-		let offset = jQuery(selector).offset();
-		jQuery('html, body').animate({
-			scrollTop: offset.top
-		}, speed);
-	},
-
-	// CHILL.isScrolled.init();
-	// When scrolled, ".scroll-active" will be added to all elements with the ".is-scrolled" class.
-	// The offset defaults to 10px. You can change it by adding a parameter: CHILL.isScrolled.init(20);
-	// Requires jQuery
-	isScrolled : {
-		init : function(offset) {
-			CHILL.isScrolled.check(offset);
-			jQuery(window).scroll(function() {
-				CHILL.isScrolled.check(offset);
-			});
-		},
-		check : function(offset) {
-			let os = 10;
-			if (offset) {
-				os = offset;
-			}
-			if (jQuery(window).scrollTop() > os) {
-				jQuery('.is-scrolled').addClass('scroll-active');
-			} else {
-				jQuery('.is-scrolled').removeClass('scroll-active');
-			}
+	// let requestedParam = CHILL.urlParams('name');
+	// let allParams = CHILL.urlParams();
+	urlParams : function(param) {
+		let queryString = window.location.search;
+		let urlSearchParams = new URLSearchParams(queryString);
+		let params = {};
+		for (const [key, value] of urlSearchParams) {
+			params[key] = value;
 		}
-	},
-
-	// Is the element visible in the viewport.
-	// Requires jQuery
-	isVisible : function(selector) {
-		jQuery(window).scroll(function() {
-			let top_of_element    = jQuery(selector).offset().top;
-			let bottom_of_element = jQuery(selector).offset().top + jQuery(selector).outerHeight();
-			let bottom_of_screen  = jQuery(window).scrollTop() + jQuery(window).innerHeight();
-			let top_of_screen     = jQuery(window).scrollTop();
-			return (bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element);
-		});
+		return (typeof params[param] !== 'undefined') ? params[param] : params;
 	},
 
 	// CHILL.resize.init(myOnResizeFunction);
@@ -174,9 +130,56 @@ const CHILL = {
 		}
 	},
 
-	// Requires jQuery
+	// CHILL.copyToClipboard('.selector');
 	copyToClipboard : function(selector) {
-		jQuery(selector).select();
+		document.querySelector(selector).select();
 		document.execCommand("copy");
+	},
+
+	// CHILL.scrollTo('.contact-form', 200);
+	// Requires jQuery
+	scrollTo : function(selector, speed) {
+		let offset = jQuery(selector).offset();
+		jQuery('html, body').animate({
+			scrollTop: offset.top
+		}, speed);
+	},
+
+	// CHILL.isScrolled.init();
+	// When scrolled, ".scroll-active" will be added to all elements with the ".is-scrolled" class.
+	// The offset defaults to 10px. You can change it by adding a parameter: CHILL.isScrolled.init(20);
+	// Requires jQuery
+	isScrolled : {
+		init : function(offset) {
+			CHILL.isScrolled.check(offset);
+			jQuery(window).scroll(function() {
+				CHILL.isScrolled.check(offset);
+			});
+		},
+		check : function(offset) {
+			let os = 10;
+			if (offset) {
+				os = offset;
+			}
+			if (jQuery(window).scrollTop() > os) {
+				jQuery('.is-scrolled').addClass('scroll-active');
+			} else {
+				jQuery('.is-scrolled').removeClass('scroll-active');
+			}
+		}
+	},
+
+	// CHILL.isVisible('.selector');
+	// Is the element visible in the viewport.
+	// Requires jQuery
+	isVisible : function(selector) {
+		jQuery(window).scroll(function() {
+			let top_of_element= jQuery(selector).offset().top;
+			let bottom_of_element = jQuery(selector).offset().top + jQuery(selector).outerHeight();
+			let bottom_of_screen = jQuery(window).scrollTop() + jQuery(window).innerHeight();
+			let top_of_screen = jQuery(window).scrollTop();
+			return (bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element);
+		});
 	}
+
 };
