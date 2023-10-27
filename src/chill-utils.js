@@ -82,6 +82,7 @@ const CHILL = {
 	},
 
 	// CHILL.resize.init(myOnResizeFunction);
+	// When the viewport is resized, call the provided function.
 	resize : {
 		init : function(callback) {
 			if(typeof callback === 'function') {
@@ -136,50 +137,10 @@ const CHILL = {
 		document.execCommand("copy");
 	},
 
-	// CHILL.scrollTo('.contact-form', 200);
-	// Requires jQuery
-	scrollTo : function(selector, speed) {
-		let offset = jQuery(selector).offset();
-		jQuery('html, body').animate({
-			scrollTop: offset.top
-		}, speed);
-	},
-
-	// CHILL.isScrolled.init();
-	// When scrolled, ".scroll-active" will be added to all elements with the ".is-scrolled" class.
-	// The offset defaults to 10px. You can change it by adding a parameter: CHILL.isScrolled.init(20);
-	// Requires jQuery
-	isScrolled : {
-		init : function(offset) {
-			CHILL.isScrolled.check(offset);
-			jQuery(window).scroll(function() {
-				CHILL.isScrolled.check(offset);
-			});
-		},
-		check : function(offset) {
-			let os = 10;
-			if (offset) {
-				os = offset;
-			}
-			if (jQuery(window).scrollTop() > os) {
-				jQuery('.is-scrolled').addClass('scroll-active');
-			} else {
-				jQuery('.is-scrolled').removeClass('scroll-active');
-			}
-		}
-	},
-
 	// CHILL.isVisible('.selector');
-	// Is the element visible in the viewport.
-	// Requires jQuery
 	isVisible : function(selector) {
-		jQuery(window).scroll(function() {
-			let top_of_element= jQuery(selector).offset().top;
-			let bottom_of_element = jQuery(selector).offset().top + jQuery(selector).outerHeight();
-			let bottom_of_screen = jQuery(window).scrollTop() + jQuery(window).innerHeight();
-			let top_of_screen = jQuery(window).scrollTop();
-			return (bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element);
-		});
+		let el = document.querySelector(selector);
+		return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
 	}
 
 };
