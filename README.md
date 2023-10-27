@@ -1,5 +1,5 @@
 # chill-utils
-####Super chill javascript and sass utilities
+#### Super chill javascript and sass utilities
 
 Start project<br>
 `npm install`
