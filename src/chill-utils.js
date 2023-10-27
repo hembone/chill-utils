@@ -32,6 +32,19 @@ const CHILL = {
 		}
 	},
 
+	// Set, get and remove local storage.
+	local : {
+		set : function(name, value) {
+			localStorage.setItem(name, value);
+		},
+		get : function(name) {
+			localStorage.getItem(name);
+		},
+		remove : function(name) {
+			localStorage.removeItem(name);
+		}
+	},
+
 	popupWindow : function(url, title, w, h) {
 		let left = (screen.width/2)-(w/2);
 		let top = (screen.height/2)-(h/2);
