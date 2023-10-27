@@ -1,21 +1,21 @@
 # chill-utils
 ####Super chill javascript and sass utilities
 
-Start project
+Start project<br>
 `npm install`
 
-To minify js and compile sass
+To minify js and compile sass<br>
 `gulp`
 
 ---
 
-`CHILL.cookie.set('cookieName', 'cookieValue', 7);`
-`CHILL.cookie.get('cookieName');`
+`CHILL.cookie.set('cookieName', 'cookieValue', 7);`<br>
+`CHILL.cookie.get('cookieName');`<br>
 `CHILL.cookie.remove('cookieName');`
 
 
-`CHILL.local.set('localName', 'localValue');`
-`CHILL.local.get('localName');`
+`CHILL.local.set('localName', 'localValue');`<br>
+`CHILL.local.get('localName');`<br>
 `CHILL.local.remove('localName');`
 
 
@@ -25,14 +25,14 @@ To minify js and compile sass
 `CHILL.getPosition('.selector');`
 
 
-`CHILL.windowWidth();`
+`CHILL.windowWidth();`<br>
 `CHILL.windowHeight();`
 
 
 `CHILL.hasUrlSegment('segment-name');`
 
 
-`CHILL.urlParams('name');`
+`CHILL.urlParams('name');`<br>
 `CHILL.urlParams();`
 
 
