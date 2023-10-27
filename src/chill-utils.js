@@ -1,6 +1,5 @@
 const CHILL = {
 
-	// Set, get and remove browser cookies.
 	cookie : {
 		set : function(name, value, days) {
 			let expires = '';
@@ -32,7 +31,6 @@ const CHILL = {
 		}
 	},
 
-	// Set, get and remove local storage.
 	local : {
 		set : function(name, value) {
 			localStorage.setItem(name, value);
@@ -51,7 +49,8 @@ const CHILL = {
 		return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 	},
 
-	getPosition : function(element) {
+	getPosition : function(selector) {
+		let element = document.querySelector(selector);
 		let xPosition = 0;
 		let yPosition = 0;
 		while(element) {
@@ -70,7 +69,6 @@ const CHILL = {
 		return window.innerHeight;
 	},
 
-	// CHILL.hasUrlSegment('segment-name');
 	hasUrlSegment : function(segment) {
 		let res = false;
 		let segments = window.location.pathname.split('/');
@@ -82,8 +80,6 @@ const CHILL = {
 		return res;
 	},
 
-	// let requestedParam = CHILL.urlParams('name');
-	// let allParams = CHILL.urlParams();
 	urlParams : function(param) {
 		let queryString = window.location.search;
 		let urlSearchParams = new URLSearchParams(queryString);
@@ -94,8 +90,6 @@ const CHILL = {
 		return (typeof params[param] !== 'undefined') ? params[param] : params;
 	},
 
-	// CHILL.resize.init(myOnResizeFunction);
-	// When the viewport is resized, call the provided function.
 	resize : {
 		init : function(callback) {
 			if(typeof callback === 'function') {
@@ -112,8 +106,6 @@ const CHILL = {
 		}
 	},
 
-	// CHILL.matchHeight('.fromSelector', '#toSelector');
-	// Match the height of the fromSelector to the toSelector.
 	matchHeight : function(fromSelector, toSelector) {
 		if (fromSelector && toSelector) {
 			let fromEl = document.querySelector(fromSelector);
@@ -125,8 +117,6 @@ const CHILL = {
 		}
 	},
 
-	// CHILL.evenHeight('.elementClass');
-	// Find all selected elements and match heights with the tallest one.
 	evenHeight : function(selector) {
 		let maxH = 0;
 		let test = 0;
@@ -144,13 +134,11 @@ const CHILL = {
 		}
 	},
 
-	// CHILL.copyToClipboard('.selector');
 	copyToClipboard : function(selector) {
 		document.querySelector(selector).select();
 		document.execCommand("copy");
 	},
 
-	// CHILL.isVisible('.selector');
 	isVisible : function(selector) {
 		let el = document.querySelector(selector);
 		return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
